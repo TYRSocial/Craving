@@ -1,0 +1,27 @@
+{
+  "name": "a-craving",
+  "version": "1.0.0",
+  "description": "A modern food craving suggestion and sharing platform",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "mongoose": "latest",
+    "jsonwebtoken": "latest",
+    "bcryptjs": "latest",
+    "axios": "latest"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.0",
+    "postcss": "8.4.32",
+    "autoprefixer": "10.4.16",
+    "eslint": "8.55.0",
+    "eslint-config-next": "15.0.0"
+  }
+}
