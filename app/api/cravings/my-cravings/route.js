@@ -11,30 +11,31 @@ export async function GET(req) {
 
     if (!token) {
       return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
+        { error: 'Unauthorized', myCravings: [] },
+        { status: 200 }
       );
     }
 
     const decoded = verifyToken(token);
     if (!decoded) {
       return NextResponse.json(
-        { error: 'Invalid token' },
-        { status: 401 }
+        { error: 'Invalid token', myCravings: [] },
+        { status: 200 }
       );
     }
 
     const user = await User.findById(decoded.userId);
     if (!user) {
       return NextResponse.json(
-        { error: 'User not found' },
-        { status: 404 }
+        { error: 'User not found', myCravings: [] },
+        { status: 200 }
       );
     }
 
-    return NextResponse.json({ myCravings: user.myCravings });
+    return NextResponse.json({ myCravings: user.myCravings || [] });
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error('GET /api/cravings/my-cravings error:', error);
+    return NextResponse.json({ myCravings: [], error: error.message }, { status: 200 });
   }
 }
 

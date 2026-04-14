@@ -25,13 +25,23 @@ export default function DashboardPage() {
 
   const fetchMyCravings = async () => {
     try {
+      if (!token) {
+        setMyCravings([]);
+        return;
+      }
       const res = await fetch('/api/cravings/my-cravings', {
         headers: { Authorization: `Bearer ${token}` },
       });
+      if (!res.ok) {
+        console.error('Failed to fetch cravings:', res.status);
+        setMyCravings([]);
+        return;
+      }
       const data = await res.json();
       setMyCravings(data.myCravings || []);
     } catch (error) {
       console.error('Failed to fetch cravings:', error);
+      setMyCravings([]);
     }
   };
 
